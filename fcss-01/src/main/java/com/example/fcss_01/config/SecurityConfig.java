@@ -10,10 +10,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
+    /**
     @Bean
     public UserDetailsService userDetailsService() {
         //return new InMemoryUserDetailsManager(); //재정의 햇기에 이제 터미널에 패스워드 uuid안나옴
@@ -23,6 +27,10 @@ public class SecurityConfig {
         return inMemoryUserDetailsManager; //이렇게 만들고 포스트맨가서 인증권한에 user: uuid 친것처럼 danny passwor하면
         //당연히 오류  이유- > 패스워드를 넣엇는데 패스워드인코더를 관리하는 정의를 안함 즉 재정의를해야함
     }
+     **/
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);}
     @Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
