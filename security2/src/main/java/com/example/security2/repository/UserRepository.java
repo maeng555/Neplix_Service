@@ -6,7 +6,9 @@ package com.example.security2.repository;
 
 import com.example.security2.domain.CreateUser;
 import com.example.security2.domain.User;
+import com.example.security2.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,7 @@ public class UserRepository {
 
     @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
+
         return userJpaRepository.findUserByUsername(username)
                 .orElseThrow(UserNotFoundException::new)
                 .toUser();

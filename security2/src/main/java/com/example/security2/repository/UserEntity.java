@@ -35,7 +35,7 @@ public class UserEntity {
         this.password =password;
         this.algorithm = algorithm;
     }
-    public User touser(){
+    public User toUser(){
         return User.builder()
                 .username(this.username)
                 .password(this.password)
@@ -54,5 +54,6 @@ public class UserEntity {
 
         ); //새로운 유저를 만들기 위한 스태틱메서드
     }
+
 
 }
