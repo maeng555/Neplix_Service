@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: auth2
+
+server:
+  port: 9090
